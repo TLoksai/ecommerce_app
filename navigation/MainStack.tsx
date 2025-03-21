@@ -11,13 +11,14 @@ const Stack = createStackNavigator();
 const MainStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="." component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Product" component={ProductScreen} />
       <Stack.Screen name="Cart" component={CartScreen} />
       <Stack.Screen name="Checkout" component={CheckoutScreen} />
-        <Stack.Screen name="Hero" component={HeroScreen} />
+      <Stack.Screen name="Hero" component={HeroScreen} />
     </Stack.Navigator>
   );
 };
+
 
 export default MainStack;
