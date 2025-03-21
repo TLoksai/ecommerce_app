@@ -1,17 +1,24 @@
 import React, { useState } from "react";
-import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
+import { View, Text, Image, FlatList, TouchableOpacity, Dimensions } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 
-
 const FirstRoute = () => (
-  <View style={styles.scene}>
-    <Text>Trending Products</Text>
+  <View className="flex-1 items-center justify-center bg-gray-100 p-4">
+    <Image 
+      source={{ uri: "https://via.placeholder.com/400x300" }} 
+      className="w-11/12 h-48 rounded-lg"
+    />
+    <Text className="text-xl font-bold text-black mt-4">Trending Products</Text>
   </View>
 );
 
 const SecondRoute = () => (
-  <View style={styles.scene}>
-    <Text>Best Sellers</Text>
+  <View className="flex-1 items-center justify-center bg-gray-100 p-4">
+    <Image 
+      source={{ uri: "https://via.placeholder.com/400x300" }} 
+      className="w-11/12 h-48 rounded-lg"
+    />
+    <Text className="text-xl font-bold text-black mt-4">Best Sellers</Text>
   </View>
 );
 
@@ -24,12 +31,12 @@ const HeroScreen = () => {
     { key: "second", title: "Best Sellers" },
   ]);
 
-  const renderTabBar = (props: any) => (
+  const renderTabBar = (props) => (
     <TabBar
       {...props}
       indicatorStyle={{ backgroundColor: "blue" }}
       style={{ backgroundColor: "white" }}
-      labelStyle={{ color: "black", fontWeight: "bold" }}
+      labelStyle={{ color: "black", fontWeight: "bold" }} 
     />
   );
 
@@ -40,18 +47,18 @@ const HeroScreen = () => {
 
   // Sample Categories Data
   const categories = [
-    { id: "1", name: "Mobiles", image: "https://via.placeholder.com/100" },
-    { id: "2", name: "Laptops", image: "https://via.placeholder.com/100" },
-    { id: "3", name: "Fashion", image: "https://via.placeholder.com/100" },
-    { id: "4", name: "Home & Kitchen", image: "https://via.placeholder.com/100" },
+    { id: "1", name: "Mobiles", image: require("../assets/images/mobile.png") },
+    { id: "2", name: "Laptops", image: require("../assets/images/laptop.jpg") },
+    { id: "3", name: "Fashion", image: require("../assets/images/rectangle22.png") },
+    { id: "4", name: "Home & Kitchen", image: require("../assets/images/homekitchen.jpeg") },
   ];
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-white">
       {/* Hero Banner */}
       <Image
         source={{ uri: "https://via.placeholder.com/400x200" }}
-        style={styles.banner}
+        className="w-full h-52 object-cover"
       />
 
       {/* Top Tabs */}
@@ -68,33 +75,19 @@ const HeroScreen = () => {
         data={categories}
         keyExtractor={(item) => item.id}
         numColumns={2}
-        contentContainerStyle={styles.categoryContainer}
+        contentContainerStyle={{ padding: 10 }}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.categoryBox}>
-            <Image source={{ uri: item.image }} style={styles.categoryImage} />
-            <Text style={styles.categoryText}>{item.name}</Text>
+          <TouchableOpacity className="flex-1 m-2 bg-gray-100 rounded-lg overflow-hidden">
+            <Image 
+              source={typeof item.image === "string" ? { uri: item.image } : item.image} 
+              className="w-full h-32 object-cover"
+            />
+            <Text className="text-lg font-bold text-black text-center my-2">{item.name}</Text>
           </TouchableOpacity>
         )}
       />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
-  banner: { width: "100%", height: 200, resizeMode: "cover" },
-  scene: { flex: 1, alignItems: "center", justifyContent: "center" },
-  categoryContainer: { padding: 10 },
-  categoryBox: {
-    flex: 1,
-    margin: 10,
-    backgroundColor: "#f8f8f8",
-    alignItems: "center",
-    padding: 15,
-    borderRadius: 10,
-  },
-  categoryImage: { width: 80, height: 80, marginBottom: 10 },
-  categoryText: { fontSize: 16, fontWeight: "bold" },
-});
 
 export default HeroScreen;
